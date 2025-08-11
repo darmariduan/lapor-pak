@@ -13,17 +13,17 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item {{ request()->is('admin.dashboard') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="list.html">
+    <li class="nav-item {{ request()->is('admin.residents.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.residents.index') }}">
             <i class="fas fa-fw fa-table"></i>
-            <span>List</span></a>
+            <span>Data Masyarakat</span></a>
     </li>
 
 

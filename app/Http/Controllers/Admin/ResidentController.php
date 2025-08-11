@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreResidentRequest;
+use App\Interfaces\ResidentRepositoryInterface;
+use Illuminate\Contracts\Cache\Store;
+
+class ResidentController extends Controller
+{
+    private $residentRepository;
+
+    public function __construct(ResidentRepositoryInterface $residentRepository)
+    {
+        $this->residentRepository = $residentRepository;
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $residents = $this->residentRepository->getAllResidents();
+        return view('pages.admin.residents.index', compact('residents'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('pages.admin.residents.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreResidentRequest $request)
+    {
+        $data = $request->validated();
+
+        $data['avatar'] = $data['avatar'] ? $data['avatar']->store('assets/avatars', 'public') : null;
+
+        $this->residentRepository->createResident($data);
+
+        return redirect()->route('admin.residents.index');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}
