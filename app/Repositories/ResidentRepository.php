@@ -31,21 +31,27 @@ class ResidentRepository implements ResidentRepositoryInterface
 
     public function updateResident(int $id, array $data)
     {
-        $resident = Resident::find($id);
-        if ($resident) {
-            $resident->update($data);
-            return $resident;
-        }
-        return null;
+        $resident = $this->getResidentById($id);
+
+        $resident->user->update([
+            'name' => $data['name'],
+            'password' => isset($data['password']) ? bcrypt($data['password']) : $resident->user->password,
+        ]);
+
+        $resident->update($data);
+
+        return $resident;
     }
 
     public function deleteResident(int $id)
     {
-        $resident = Resident::find($id);
+        $resident = $this->getResidentById($id);
+
         if ($resident) {
-            $resident->delete();
-            return true;
+            $resident->user->delete();
+            return $resident->delete();
         }
+
         return false;
     }
 }

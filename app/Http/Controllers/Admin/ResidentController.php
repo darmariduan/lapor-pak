@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreResidentRequest;
+use App\Http\Requests\UpdateResidentRequest;
 use App\Interfaces\ResidentRepositoryInterface;
 use Illuminate\Contracts\Cache\Store;
+use RealRashid\SweetAlert\Facades\Alert as Swal;
 
 class ResidentController extends Controller
 {
@@ -44,6 +46,7 @@ class ResidentController extends Controller
         $data['avatar'] = $data['avatar'] ? $data['avatar']->store('assets/avatars', 'public') : null;
 
         $this->residentRepository->createResident($data);
+        Swal::toast('Data berhasil ditambahkan.', 'success')->timerProgressBar();
 
         return redirect()->route('admin.residents.index');
     }
@@ -53,7 +56,8 @@ class ResidentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $resident = $this->residentRepository->getResidentById($id);
+        return view('pages.admin.residents.show', compact('resident'));
     }
 
     /**
@@ -61,15 +65,23 @@ class ResidentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $resident = $this->residentRepository->getResidentById($id);
+        return view('pages.admin.residents.edit', compact('resident'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateResidentRequest $request, string $id)
     {
-        //
+        $data = $request->validated();
+
+        $data['avatar'] = $data['avatar'] ? $data['avatar']->store('assets/avatars', 'public') : null;
+
+        $this->residentRepository->updateResident($id, $data);
+        Swal::toast('Data berhasil diupdate.', 'success')->timerProgressBar();
+
+        return redirect()->route('admin.residents.index');
     }
 
     /**
@@ -77,6 +89,10 @@ class ResidentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->residentRepository->deleteResident($id);
+
+        Swal::toast('Data berhasil dihapus.', 'success')->timerProgressBar();
+
+        return redirect()->route('admin.residents.index');
     }
 }

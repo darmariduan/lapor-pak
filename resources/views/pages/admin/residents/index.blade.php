@@ -5,7 +5,7 @@
 @section('content')
     <div class="container-fluid">
 
-        <a href="{}" class="btn btn-primary mb-3">Tambah Data</a>
+        <a href="{{ route('admin.residents.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
 
 
         <div class="card shadow mb-4">
@@ -34,11 +34,16 @@
                                             width="100">
                                     </td>
                                     <td>
-                                        <a href="edit.html" class="btn btn-warning">Edit</a>
+                                        <a href="{{ route('admin.residents.edit', $resident->id) }}"
+                                            class="btn btn-warning">Edit</a>
 
-                                        <a href="show.html" class="btn btn-info">Show</a>
+                                        <a href="{{ route('admin.residents.show', $resident->id) }}"
+                                            class="btn btn-info">Show</a>
 
-                                        <form action="" method="POST" class="d-inline">
+                                        <form action="{{ route('admin.residents.destroy', $resident->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
                                     </td>
