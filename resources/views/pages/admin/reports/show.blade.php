@@ -108,7 +108,8 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold text-primary">Riwayat Status</h6>
-                <a href="#" class="btn btn-sm btn-primary">Tambah Status</a>
+                <a href="{{ route('admin.report-statuses.create', ['report_id' => $report->id]) }}"
+                    class="btn btn-sm btn-primary">Tambah Status</a>
             </div>
             <div class="card-body">
                 @if ($report->reportStatuses->count() > 0)
@@ -121,6 +122,7 @@
                                     <th>Deskripsi</th>
                                     <th>Bukti</th>
                                     <th>Tanggal</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -148,6 +150,26 @@
                                             @endif
                                         </td>
                                         <td>{{ $status->created_at->format('d M Y H:i') }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.report-statuses.edit', $status->id) }}"
+                                                class="btn btn-sm btn-warning">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{{ route('admin.report-statuses.show', $status->id) }}"
+                                                class="btn btn-sm btn-info">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <form id="delete-form-{{ $status->id }}"
+                                                action="{{ route('admin.report-statuses.destroy', $status->id) }}"
+                                                method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-sm btn-danger delete-btn"
+                                                    data-id="{{ $status->id }}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -177,5 +199,35 @@
                 .bindPopup('{{ $report->title }}')
                 .openPopup();
         @endif
+
+        // SweetAlert untuk konfirmasi hapus
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+
+            if (deleteButtons.length > 0) {
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const id = this.getAttribute('data-id');
+
+                        Swal.fire({
+                            title: 'Konfirmasi Hapus',
+                            text: "Apakah Anda yakin ingin menghapus status ini?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Ya, Hapus!',
+                            cancelButtonText: 'Batal',
+                            reverseButtons: true
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                document.getElementById('delete-form-' + id).submit();
+                            }
+                        });
+                    });
+                });
+            }
+        });
     </script>
 @endsection

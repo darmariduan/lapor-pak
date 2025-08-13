@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ResidentController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ReportStatusController;
 use App\Http\Controllers\Admin\ReportCategoryController;
 
 Route::get('/', function () {
@@ -20,4 +21,5 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'role:admin')->group(
     Route::resource('/residents', ResidentController::class);
     Route::resource('/report-categories', ReportCategoryController::class);
     Route::resource('/reports', ReportController::class);
+    Route::resource('/report-statuses', ReportStatusController::class);
 });
