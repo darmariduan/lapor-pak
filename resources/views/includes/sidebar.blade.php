@@ -30,6 +30,11 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Data Kategori Pelaporan</span></a>
     </li>
+    <li class="nav-item {{ request()->is('admin.reports.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.reports.index') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Data Pelaporan</span></a>
+    </li>
 
 
 </ul>
