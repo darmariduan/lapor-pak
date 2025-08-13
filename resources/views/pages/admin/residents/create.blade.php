@@ -6,7 +6,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <a href="list.html" class="btn btn-danger mb-3">Kembali</a>
+        <a href="{{ route('admin.residents.index') }}" class="btn btn-danger mb-3">Kembali</a>
 
 
         <!-- DataTales Example -->
