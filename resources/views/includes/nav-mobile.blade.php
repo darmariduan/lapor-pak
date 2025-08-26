@@ -15,8 +15,15 @@
          <i class="fas fa-bell"></i>
          Notifikasi
      </a>
-     <a href="profile.html" class="">
-         <i class="fas fa-user"></i>
-         Profil
-     </a>
+     @auth
+         <a href="{{ route('profile.index') }}" class="">
+             <i class="fas fa-user"></i>
+             Profil
+         </a>
+     @else
+         <a href="{{ route('auth.register') }}" class="">
+             <i class="fas fa-user-plus"></i>
+             Daftar
+         </a>
+     @endauth
  </nav>

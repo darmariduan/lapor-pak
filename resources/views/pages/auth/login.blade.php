@@ -17,6 +17,14 @@
         <hr class="flex-grow-1">
     </div>
 
+    {{-- Tambahkan pesan success --}}
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <form action="{{ route('auth.login.store') }}" method="POST" class="mt-4">
         @csrf
         <div class="mb-3">
@@ -46,7 +54,7 @@
         </button>
 
         <div class="d-flex justify-content-between mt-3">
-            <a href="signup.html" class="text-decoration-none text-primary">Belum punya akun?</a>
+            <a href="{{ route('auth.register') }}" class="text-decoration-none text-primary">Belum punya akun?</a>
             <a href="" class="text-decoration-none text-primary">Lupa
                 Password</a>
         </div>

@@ -27,8 +27,11 @@ class LoginController extends Controller
             $user = auth()->user();
             if ($user && $user->hasRole('admin')) {
                 return redirect()->route('admin.dashboard');
+            } elseif ($user && $user->hasRole('resident')) {
+                return redirect()->route('home');
             }
         }
+
         return redirect()->route('auth.login')->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
