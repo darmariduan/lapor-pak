@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\ReportStatusController;
 use App\Http\Controllers\Admin\ReportCategoryController;
 use App\Http\Controllers\User\ReportController as UserReportController;
 
+/* URL Mapping */
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/reports', [UserReportController::class, 'index'])->name('report.index');
 Route::get('/report/{code}', [UserReportController::class, 'show'])->name('report.show');

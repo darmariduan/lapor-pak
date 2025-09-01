@@ -19,4 +19,4 @@ jobs:
           script: |
             cd ${{ secrets.PROJECT_PATH }}
             git pull origin main
-            find ${{ secrets.PROJECT_PATH }} ! -name ".user.ini" -exec chown www:www {} +
+            chown -R www:www ${{ secrets.PROJECT_PATH }}
