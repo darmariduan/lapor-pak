@@ -21,3 +21,4 @@ jobs:
           script: |
             cd /www/wwwroot/lapor.freehost.id
             git pull origin main
+            chown -R www:www /www/wwwroot/lapor.freehost.id
