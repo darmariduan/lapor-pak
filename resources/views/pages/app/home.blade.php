@@ -3,7 +3,7 @@
 
 @section('content')
     <h6 class="greeting">Hi, {{ Auth::user()->name ?? 'Lapor Pak' }}</h6>
-    <h4 class="home-headline">TEST</h4>
+    <h4 class="home-headline">Laporkan masalahmu dan kami segera atasi itu</h4>
 
     <div class="d-flex align-items-center gap-4 py-3 overflow-auto" id="category" style="white-space: nowrap;">
 
