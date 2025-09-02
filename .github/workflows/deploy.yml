@@ -16,8 +16,8 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.VPS_PORT }}
-        script: |
-          git config --global --add safe.directory "${{ secrets.PROJECT_PATH }}"
-          cd ${{ secrets.PROJECT_PATH }}
-          git pull origin main
-          # chown -R www:www ${{ secrets.PROJECT_PATH }}
+          script: |
+            git config --global --add safe.directory "${{ secrets.PROJECT_PATH }}"
+            cd ${{ secrets.PROJECT_PATH }}
+            git pull origin main
+            # chown -R www:www ${{ secrets.PROJECT_PATH }}
