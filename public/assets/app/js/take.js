@@ -14,7 +14,7 @@ function handleVideo(stream) {
 }
 
 function videoError(e) {
-    alert("Izinkan menggunakan webcam untuk demo!");
+    alert("Izinkan menggunakan webcam untuk mengambil foto!");
 }
 
 function takeSnapshot() {
