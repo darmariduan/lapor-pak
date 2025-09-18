@@ -59,7 +59,7 @@
                                     <img src="{{ asset('assets/app/images/icons/MapPin.png') }}" alt="map pin"
                                         class="icon me-2">
                                     <p class="text-primary city">
-                                        {{ $report->address }}
+                                        {{ \Str::substr($report->address, 0, 20) }}...
                                     </p>
                                 </div>
 

@@ -6,6 +6,7 @@ interface ReportRepositoryInterface
 {
     public function getAllReports();
     public function getLatestReports();
+    public function getReportsByResidentId(string $status);
     public function getReportById(string $id);
     public function getReportByCode(string $code);
     public function getReportByCategory(string $category);

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreReportRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class StoreReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'resident_id' => 'required|exists:residents,id',
+            'resident_id' => Auth::user()->hasRole('resident') ? 'nullable|exists:residents,id' : 'required|exists:residents,id',
             'report_category_id' => 'required|exists:report_categories,id',
             'title' => 'required|string|max:255',
             'description' => 'required|string',

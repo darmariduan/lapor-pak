@@ -8,7 +8,7 @@
         <i class="fas fa-house"></i>
         Beranda
     </a>
-    <a href="{{ route('report.index') }}" class="">
+    <a href="{{ route('report.myreport', ['status' => 'pending']) }}" class="">
         <i class="fas fa-solid fa-clipboard-list"></i>
         Laporanmu
     </a>
