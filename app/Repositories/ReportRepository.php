@@ -51,7 +51,7 @@ class ReportRepository implements ReportRepositoryInterface
     public function createReport(array $data)
     {
         $report = Report::create($data);
-        $report->reportStatus()->create(['status' => 'pending', 'description' => 'Laporan telah dibuat dan menunggu verifikasi.']);
+        $report->reportStatuses()->create(['status' => 'pending', 'description' => 'Laporan telah dibuat dan menunggu verifikasi.']);
         return $report;
     }
 

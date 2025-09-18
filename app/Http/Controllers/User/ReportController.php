@@ -60,13 +60,17 @@ class ReportController extends Controller
     }
 
     public function store(StoreReportRequest $request)
+
     {
-        $validated = $request->validated();
+        $data = $request->validated();
         // Generate unique code for the report
         $data['code'] = 'REP-' . date('Ymd') . '-' . strtoupper(Str::random(5));
         $data['resident_id'] = Auth::user()->resident->id;
 
-        $data['image'] = $request->file('image')->store('assets/report/image', 'public');
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('assets/report/image', 'public');
+        }
 
         $this->reportRepository->createReport($data);
 

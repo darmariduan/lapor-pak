@@ -33,23 +33,29 @@
                         <div class="card-body p-0">
                             <div class="card-report-image position-relative mb-2">
                                 <img src="{{ asset('storage/' . $report->image) }}" alt="">
-                                @if ($report->reportStatuses->last()->status === 'pending')
+                                @php
+                                    $lastStatus = $report->reportStatuses->last();
+                                @endphp
+
+                                @if ($lastStatus && $lastStatus->status === 'pending')
                                     <div class="badge-status pending">
                                         Pending
                                     </div>
-                                @elseif (
-                                    $report->reportStatuses->last()->status === 'on_process' ||
-                                        $report->reportStatuses->last()->status === 'in_progress')
+                                @elseif ($lastStatus && ($lastStatus->status === 'on_process' || $lastStatus->status === 'in_progress'))
                                     <div class="badge-status on-process">
                                         Diproses
                                     </div>
-                                @elseif ($report->reportStatuses->last()->status === 'resolved')
+                                @elseif ($lastStatus && $lastStatus->status === 'resolved')
                                     <div class="badge-status resolved">
                                         Selesai
                                     </div>
-                                @elseif ($report->reportStatuses->last()->status === 'rejected')
+                                @elseif ($lastStatus && $lastStatus->status === 'rejected')
                                     <div class="badge-status rejected">
                                         Ditolak
+                                    </div>
+                                @else
+                                    <div class="badge-status pending">
+                                        Status Kosong
                                     </div>
                                 @endif
                             </div>
