@@ -5,7 +5,8 @@
     <h6 class="greeting">Hi, {{ Auth::user()->name ?? 'Lapor Pak' }}</h6>
     <h4 class="home-headline">Laporkan masalahmu dan kami segera atasi itu</h4>
 
-    <div class="d-flex align-items-center gap-4 py-3 overflow-auto" id="category" style="white-space: nowrap;">
+    <div class="d-flex align-items-center justify-content-center gap-4 py-3 overflow-auto" id="category"
+        style="white-space: nowrap;">
 
         @foreach ($categories as $category)
             <a href="{{ route('report.index', ['category' => $category->name]) }}" class="category d-inline-block">

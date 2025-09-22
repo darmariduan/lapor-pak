@@ -8,10 +8,17 @@
         <i class="fas fa-house"></i>
         Beranda
     </a>
-    <a href="{{ route('report.myreport', ['status' => 'pending']) }}" class="">
-        <i class="fas fa-solid fa-clipboard-list"></i>
-        Laporanmu
-    </a>
+    @auth
+        <a href="{{ route('report.myreport', ['status' => 'pending']) }}" class="">
+            <i class="fas fa-solid fa-clipboard-list"></i>
+            Laporanmu
+        </a>
+    @else
+        <a href="{{ route('auth.login') }}" class="">
+            <i class="fas fa-solid fa-clipboard-list"></i>
+            Laporanmu
+        </a>
+    @endauth
     <div></div>
     <div></div>
     <div></div>
